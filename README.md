@@ -1,2 +1,3 @@
-# forager-journal
-Location saving and note-taking for foraging
+# Forager Journal
+
+Location saving and note-taking for foraging.
