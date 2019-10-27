@@ -1,0 +1,29 @@
+{
+  "name": "forager-journal",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Avalai/forager-journal.git"
+  },
+  "keywords": [
+    "foraging"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Avalai/forager-journal/issues"
+  },
+  "homepage": "https://github.com/Avalai/forager-journal#readme",
+  "dependencies": {
+    "next": "^9.1.1",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
+  }
+}
