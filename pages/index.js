@@ -1,7 +1,9 @@
+import Page from '../containers/Page'
+
 export default function Index() {
     return (
-        <div>
+        <Page>
             <p>App time!</p>
-        </div>
+        </Page>
     )
 }
