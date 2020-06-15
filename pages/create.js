@@ -3,7 +3,7 @@ import Layout from '../components/Layout'
 export default function Index() {
     return (
         <Layout>
-            <p>App time! (Home)</p>
+            <p>(Create)</p>
         </Layout>
     )
 }
