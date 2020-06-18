@@ -52,9 +52,11 @@ export default function BottomNav() {
 
             <div className={classes.grow} />
 
-            <IconButton color="inherit">
-                <SearchIcon />
-            </IconButton>
+            <Link href="/search"><a className={classes.link}>
+                <IconButton color="inherit">
+                    <SearchIcon />
+                </IconButton>
+            </a></Link>
 
             <Link href="/settings"><a className={classes.link}>
                 <IconButton edge="end" color="inherit">
