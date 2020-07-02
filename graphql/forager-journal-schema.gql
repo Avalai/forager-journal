@@ -1,0 +1,40 @@
+
+enum Size{
+	XS
+	S
+	M
+	L
+	XL
+}
+
+type Species{
+	name: String!
+	scientificName: String
+	edible: Boolean
+	produces: Boolean
+	notes: String
+	icon: String!
+	size: Size!
+	findings: [Finding!]!
+}
+
+type Finding{
+	species: Species
+	producing: Boolean
+	lat: Float!
+	long: Float!
+	notes: String
+	harvests: [Harvest!]!
+}
+
+type Harvest{
+	finding: Finding
+	notes: String
+	timestamp: Time
+}
+
+type Query {
+  findings: [Finding]
+	species: [Species]
+	harvests: [Harvest]
+}
