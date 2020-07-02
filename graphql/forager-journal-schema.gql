@@ -14,17 +14,17 @@ type Species{
 	produces: Boolean
 	notes: String
 	icon: String!
-	size: Size!
-	findings: [Finding!]!
+	findings: [Finding!] @relation
 }
 
 type Finding{
 	species: Species
+  size: Size!
 	producing: Boolean
 	lat: Float!
 	long: Float!
 	notes: String
-	harvests: [Harvest!]!
+	harvests: [Harvest!] @relation
 }
 
 type Harvest{
