@@ -23,8 +23,10 @@
   },
   "homepage": "https://github.com/Avalai/forager-journal#readme",
   "dependencies": {
+    "@apollo/client": "^3.0.0-rc.10",
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.9.1",
+    "graphql": "^15.2.0",
     "next": "^9.1.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
