@@ -7,7 +7,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "setup-fauna": "node ./scripts/setup-fauna.js"
+    "setup-fauna": "node ./scripts/setup-fauna.js",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "repository": {
     "type": "git",
@@ -32,8 +33,13 @@
     "react-dom": "^16.11.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.16.0",
     "faunadb": "^2.14.2",
     "request": "^2.88.2",
-    "stream-to-promise": "^3.0.0"
+    "stream-to-promise": "^3.0.0",
+    "@graphql-codegen/typescript": "1.16.0",
+    "@graphql-codegen/typescript-operations": "1.16.0",
+    "@graphql-codegen/typescript-react-apollo": "1.16.0",
+    "@graphql-codegen/introspection": "1.16.0"
   }
 }

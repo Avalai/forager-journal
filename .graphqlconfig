@@ -1,0 +1,13 @@
+{
+  "schemaPath": "graphql/schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "dev": {
+        "url": "https://graphql.fauna.com/graphql",
+        "headers": {
+          "Authorization": "Bearer fnADvxpi23ACAAain2hjSuTss3Bz5Pe4V3T2GGRb"
+        }
+      }
+    }
+  }
+}

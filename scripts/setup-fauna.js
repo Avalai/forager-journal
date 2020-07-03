@@ -33,6 +33,7 @@ readline.question(`Please provide the FaunaDB admin key\n`, (adminKey) => {
     .catch((err) => {
       console.error(err)
       console.error(`Could not import schema, closing`)
+      throw('')
     })
     .then(() => {
       // The GraphQL schema is important, this means that we now have a GuestbookEntry Collection and an entries index.
@@ -86,6 +87,7 @@ readline.question(`Please provide the FaunaDB admin key\n`, (adminKey) => {
     .catch((err) => {
       console.error(err)
       console.error(`Failed to create role, closing`)
+      throw('')
     })
     .then((res) => {
       // The GraphQL schema is important, this means that we now have a GuestbookEntry Collection and an entries index.

@@ -1,5 +1,10 @@
 import Layout from '../components/Layout'
 import { useQuery, gql } from '@apollo/client'
+import { SpeciesPage } from '../types/graphql'
+
+type SpeciesList = {
+    species: SpeciesPage
+}
 
 const SPECIES = gql`
   query ListSpecies {
@@ -15,7 +20,7 @@ const SPECIES = gql`
 `
 
 export default function Example() {
-    const { loading, error, data } = useQuery(SPECIES)
+    const { loading, error, data } = useQuery<SpeciesList>(SPECIES)
 
     if (loading) return <Layout><p>Loading...</p></Layout>
     if (error) return <Layout><p>Error <pre>{error}</pre></p></Layout>

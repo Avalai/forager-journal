@@ -1,0 +1,260 @@
+directive @embedded on OBJECT
+directive @collection(name: String!) on OBJECT
+directive @index(name: String!) on FIELD_DEFINITION
+directive @resolver(
+  name: String
+  paginated: Boolean! = false
+) on FIELD_DEFINITION
+directive @relation(name: String) on FIELD_DEFINITION
+directive @unique(index: String) on FIELD_DEFINITION
+scalar Date
+
+type Finding {
+  species: Species
+  size: Size!
+  # The document's ID.
+  _id: ID!
+  producing: Boolean
+  long: Float!
+  notes: String
+  harvests(
+    # The number of items to return per page.
+    _size: Int
+    # The pagination cursor.
+    _cursor: String
+  ): HarvestPage!
+  lat: Float!
+  # The document's timestamp.
+  _ts: Long!
+}
+
+# Allow manipulating the relationship between the types 'Finding' and 'Harvest'.
+input FindingHarvestsRelation {
+  # Create one or more documents of type 'Harvest' and associate them with the current document.
+  create: [HarvestInput]
+  # Connect one or more documents of type 'Harvest' with the current document using their IDs.
+  connect: [ID]
+  # Disconnect the given documents of type 'Harvest' from the current document using their IDs.
+  disconnect: [ID]
+}
+
+# 'Finding' input values
+input FindingInput {
+  species: FindingSpeciesRelation
+  size: Size!
+  producing: Boolean
+  lat: Float!
+  long: Float!
+  notes: String
+  harvests: FindingHarvestsRelation
+}
+
+# The pagination object for elements of type 'Finding'.
+type FindingPage {
+  # The elements of type 'Finding' in this page.
+  data: [Finding]!
+  # A cursor for elements coming after the current page.
+  after: String
+  # A cursor for elements coming before the current page.
+  before: String
+}
+
+# Allow manipulating the relationship between the types 'Finding' and 'Species' using the field 'Finding.species'.
+input FindingSpeciesRelation {
+  # Create a document of type 'Species' and associate it with the current document.
+  create: SpeciesInput
+  # Connect a document of type 'Species' with the current document using its ID.
+  connect: ID
+  # If true, disconnects this document from 'Species'
+  disconnect: Boolean
+}
+
+type Harvest {
+  # The document's ID.
+  _id: ID!
+  # The document's timestamp.
+  _ts: Long!
+  finding: Finding
+  notes: String
+}
+
+# Allow manipulating the relationship between the types 'Harvest' and 'Finding' using the field 'Harvest.finding'.
+input HarvestFindingRelation {
+  # Create a document of type 'Finding' and associate it with the current document.
+  create: FindingInput
+  # Connect a document of type 'Finding' with the current document using its ID.
+  connect: ID
+  # If true, disconnects this document from 'Finding'
+  disconnect: Boolean
+}
+
+# 'Harvest' input values
+input HarvestInput {
+  finding: HarvestFindingRelation
+  notes: String
+}
+
+# The pagination object for elements of type 'Harvest'.
+type HarvestPage {
+  # The elements of type 'Harvest' in this page.
+  data: [Harvest]!
+  # A cursor for elements coming after the current page.
+  after: String
+  # A cursor for elements coming before the current page.
+  before: String
+}
+
+# The `Long` scalar type represents non-fractional signed whole numeric values.
+# Long can represent values between -(2^63) and 2^63 - 1.
+scalar Long
+
+type Mutation {
+  # Update an existing document in the collection of 'Species'
+  updateSpecies(
+    # The 'Species' document's ID
+    id: ID!
+    # 'Species' input values
+    data: SpeciesInput!
+  ): Species
+  # Delete an existing document in the collection of 'Species'
+  deleteSpecies(
+    # The 'Species' document's ID
+    id: ID!
+  ): Species
+  # Update an existing document in the collection of 'Finding'
+  updateFinding(
+    # The 'Finding' document's ID
+    id: ID!
+    # 'Finding' input values
+    data: FindingInput!
+  ): Finding
+  # Create a new document in the collection of 'Finding'
+  createFinding(
+    # 'Finding' input values
+    data: FindingInput!
+  ): Finding!
+  # Delete an existing document in the collection of 'Harvest'
+  deleteHarvest(
+    # The 'Harvest' document's ID
+    id: ID!
+  ): Harvest
+  # Create a new document in the collection of 'Harvest'
+  createHarvest(
+    # 'Harvest' input values
+    data: HarvestInput!
+  ): Harvest!
+  # Update an existing document in the collection of 'Harvest'
+  updateHarvest(
+    # The 'Harvest' document's ID
+    id: ID!
+    # 'Harvest' input values
+    data: HarvestInput!
+  ): Harvest
+  # Create a new document in the collection of 'Species'
+  createSpecies(
+    # 'Species' input values
+    data: SpeciesInput!
+  ): Species!
+  # Delete an existing document in the collection of 'Finding'
+  deleteFinding(
+    # The 'Finding' document's ID
+    id: ID!
+  ): Finding
+}
+
+type Query {
+  species(
+    # The number of items to return per page.
+    _size: Int
+    # The pagination cursor.
+    _cursor: String
+  ): SpeciesPage!
+  # Find a document from the collection of 'Species' by its id.
+  findSpeciesByID(
+    # The 'Species' document's ID
+    id: ID!
+  ): Species
+  findings(
+    # The number of items to return per page.
+    _size: Int
+    # The pagination cursor.
+    _cursor: String
+  ): FindingPage!
+  # Find a document from the collection of 'Harvest' by its id.
+  findHarvestByID(
+    # The 'Harvest' document's ID
+    id: ID!
+  ): Harvest
+  harvests(
+    # The number of items to return per page.
+    _size: Int
+    # The pagination cursor.
+    _cursor: String
+  ): HarvestPage!
+  # Find a document from the collection of 'Finding' by its id.
+  findFindingByID(
+    # The 'Finding' document's ID
+    id: ID!
+  ): Finding
+}
+
+enum Size {
+  XS
+  S
+  M
+  L
+  XL
+}
+
+type Species {
+  name: String!
+  # The document's ID.
+  _id: ID!
+  icon: String!
+  edible: Boolean
+  scientificName: String
+  findings(
+    # The number of items to return per page.
+    _size: Int
+    # The pagination cursor.
+    _cursor: String
+  ): FindingPage!
+  produces: Boolean
+  notes: String
+  # The document's timestamp.
+  _ts: Long!
+}
+
+# Allow manipulating the relationship between the types 'Species' and 'Finding'.
+input SpeciesFindingsRelation {
+  # Create one or more documents of type 'Finding' and associate them with the current document.
+  create: [FindingInput]
+  # Connect one or more documents of type 'Finding' with the current document using their IDs.
+  connect: [ID]
+  # Disconnect the given documents of type 'Finding' from the current document using their IDs.
+  disconnect: [ID]
+}
+
+# 'Species' input values
+input SpeciesInput {
+  name: String!
+  scientificName: String
+  edible: Boolean
+  produces: Boolean
+  notes: String
+  icon: String!
+  findings: SpeciesFindingsRelation
+}
+
+# The pagination object for elements of type 'Species'.
+type SpeciesPage {
+  # The elements of type 'Species' in this page.
+  data: [Species]!
+  # A cursor for elements coming after the current page.
+  after: String
+  # A cursor for elements coming before the current page.
+  before: String
+}
+
+scalar Time
+
