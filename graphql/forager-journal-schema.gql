@@ -1,40 +1,40 @@
 
 enum Size{
-	XS
-	S
-	M
-	L
-	XL
+  XS
+  S
+  M
+  L
+  XL
 }
 
 type Species{
-	name: String!
-	scientificName: String
-	edible: Boolean
-	produces: Boolean
-	notes: String
-	icon: String!
-	findings: [Finding!] @relation
+  name: String!
+  scientificName: String
+  edible: Boolean
+  produces: Boolean
+  notes: String
+  icon: String!
+  findings: [Finding!] @relation
 }
 
 type Finding{
-	species: Species
+  species: Species
   size: Size!
-	producing: Boolean
-	lat: Float!
-	long: Float!
-	notes: String
-	harvests: [Harvest!] @relation
+  producing: Boolean
+  lat: Float!
+  long: Float!
+  notes: String
+  harvests: [Harvest!] @relation
 }
 
 type Harvest{
-	finding: Finding
-	notes: String
-	timestamp: Time
+  finding: Finding
+  notes: String
+  timestamp: Time
 }
 
 type Query {
   findings: [Finding]
-	species: [Species]
-	harvests: [Harvest]
+  species: [Species]
+  harvests: [Harvest]
 }
